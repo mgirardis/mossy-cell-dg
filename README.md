@@ -21,7 +21,6 @@ to run the basic paper simulations (first set the permissions of this script to 
 # plotting
 to plot the data we have in the paper (included in the folder `data`), use the following jupyter notebooks
 
-paper figures
     plot_eifdtboundsigklr_noKcurr_data_paper.ipynb
 
 # get help
