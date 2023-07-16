@@ -96,7 +96,7 @@ def main():
 
     current_weights = None
     if doWeightCurrents:
-        current_weights = inp.get_current_weights_from_volt_traces(stimArgs['I0'],'data/experiments/hMC_StepCurrent_DataJune2021.mat',convert_to_pA=True)
+        current_weights = inp.get_current_weights_from_volt_traces(stimArgs['I0'],'D:/Dropbox/p/uottawa/data/mossy_cell_experiment/2020-06-25/hMC_StepCurrent_DataJune2021.mat',convert_to_pA=True)
 
     simArgs = {
                 **neuronArgs,
@@ -133,7 +133,7 @@ def main():
         outFileNamePrefix_fig,outFileNamePrefix_data = (outFileNamePrefix_fig + '_OLD',outFileNamePrefix_data + '_OLD')
 
     if not showOldData:
-        exp_data = inp.import_mc_experiment_matfile('data/experiments/hMC_IntrinsicParameters_normalSteps.mat')
+        exp_data = inp.import_mc_experiment_matfile('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\by_current\\hMC_IntrinsicParameters_normalSteps.mat')
 
     avg_data_struct = lambda s: inp.avg_data_matrix(s['avg'],s['std'],parVal=s['I'],avgType=avgModelData,axis=1,parValRange=avgRange,weights=current_weights)
 
@@ -237,7 +237,7 @@ def main():
     if hasSpk:
         print('# plotting ISI series')
         if showOldData:
-            isi_normal_data = pandas.read_table('data/experiments/ISI_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
+            isi_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\ISI_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
             p.errorfill(isi_normal_data[:,0],isi_normal_data[:,1],isi_normal_data[:,2],fmt=':+', label='100pA-200pA experiments',color=color_list[3])
             p.errorfill(ISIstruct['spk'], ISIstruct['avg'], ISIstruct['std'], fmt='o--', color=color_list[0],ax=p.plt.gca(),label='Model')
             p.plt.xlabel('Spike #')
@@ -273,7 +273,7 @@ def main():
     if hasSpk:
         print('# plotting AHP amplitude')
         if showOldData:
-            ahp_normal_data = pandas.read_table('data/experiments/AHP_Amplitude_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
+            ahp_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\AHP_Amplitude_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
             p.errorfill(ahp_normal_data[:,0],ahp_normal_data[:,1],ahp_normal_data[:,2],fmt=':+', label='100pA-200pA experiments',color=color_list[3])
             p.errorfill(AHPAmpStruct['spk'], AHPAmpStruct['avg'], AHPAmpStruct['std'], fmt='o--', color=color_list[0],ax=p.plt.gca(),label='Model')
             p.plt.xlabel('Spike #')
@@ -309,7 +309,7 @@ def main():
     if hasSpk:
         print('# plotting AHP minimum')
         if showOldData:
-            ahp_normal_data = pandas.read_table('data/experiments/AHP_Min_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
+            ahp_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\AHP_Min_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
             p.errorfill(ahp_normal_data[:,0],ahp_normal_data[:,1],ahp_normal_data[:,2],fmt=':+', label='100pA-200pA experiments',color=color_list[3])
             p.errorfill(AHPMinStruct['spk'], AHPMinStruct['avg'], AHPMinStruct['std'], fmt='o--', color=color_list[0],ax=p.plt.gca(),label='Model')
             p.plt.xlabel('Spike #')
@@ -345,7 +345,7 @@ def main():
     if hasSpk:
         print('# plotting DeltaTheta vs. spike #')
         if showOldData:
-            dth_normal_data = pandas.read_table('data/experiments/DeltaTheta_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
+            dth_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\DeltaTheta_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
             p.errorfill(dth_normal_data[:,0],dth_normal_data[:,1],dth_normal_data[:,2],fmt=':+', label='100pA-200pA experiments',color=color_list[3])
             p.errorfill(DeltaThetaStruct['spk'], DeltaThetaStruct['avg'], DeltaThetaStruct['std'], fmt='o--', color=color_list[0],ax=p.plt.gca(),label='Model')
             p.plt.xlabel('Spike #')
@@ -381,7 +381,7 @@ def main():
     if hasSpk:
         print('# plotting threshold at spike timings')
         if showOldData:
-            th_normal_data = pandas.read_table('data/experiments/ThresholdDiff_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
+            th_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\ThresholdDiff_normalSteps.dat',sep=' ', header=None, comment='#').to_numpy()
             p.errorfill(th_normal_data[:,0],th_normal_data[:,1],th_normal_data[:,2],fmt=':+', label='100pA-200pA experiments',color=color_list[3])
             p.errorfill(SpkThreshStruct['spk'], SpkThreshStruct['avg'] - SpkThreshStruct['avg'][0], SpkThreshStruct['std'], fmt='o--', color=color_list[0],ax=p.plt.gca(),label='Model')
             p.plt.matplotlib.rc('text',usetex=True)
@@ -418,7 +418,7 @@ def main():
         fitFunc = lambda xx,a,b,c: a * numpy.exp(-b * xx) + c
         fitFuncExp = lambda xx,a,b: a * numpy.exp(-b * xx)
         x_fit = numpy.linspace(DeltaT[0],DeltaT[-1],100)
-        th_normal_data = pandas.read_table('data/experiments/MC_RAMP_Tau.dat',
+        th_normal_data = pandas.read_table('D:\\Dropbox\\p\\uottawa\\data\\mossy_cell_experiment\\MC_RAMP_Tau.dat',
                                     sep=' ', header=None, comment='#').to_numpy()
         fitParam_model, _ = scipy.optimize.curve_fit(fitFunc, DeltaT, th_amp, p0=(1.0,1.0/simArgs['tauTheta'],simArgs['theta0']), maxfev=100000)
         fitParam_data, _ = scipy.optimize.curve_fit(fitFuncExp, th_normal_data[:,0], th_normal_data[:,1], p0=(1.0,0.0001), maxfev=100000)
